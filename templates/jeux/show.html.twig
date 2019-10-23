@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Jeux{% endblock %}
+
+{% block body %}
+<div class="demo-blog mdl-layout mdl-js-layout has-drawer is-upgraded">
+    <h1>Jeux</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ jeux.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ jeux.nom }}</td>
+            </tr>
+            <tr>
+                <th>Annee</th>
+                <td>{{ jeux.annee }}</td>
+            </tr>
+            <tr>
+                <th>Nbre_joueur_min</th>
+                <td>{{ jeux.nbreJoueurMin }}</td>
+            </tr>
+            <tr>
+                <th>Nbre_joueur_max</th>
+                <td>{{ jeux.nbreJoueurMax }}</td>
+            </tr>
+            <tr>
+                <th>Descriptif</th>
+                <td>{{ jeux.descriptif }}</td>
+            </tr>
+            <tr>
+                <th>Duree_min</th>
+                <td>{{ jeux.dureeMin }}</td>
+            </tr>
+            <tr>
+                <th>Duree_max</th>
+                <td>{{ jeux.dureeMax }}</td>
+            </tr>
+            <tr>
+                <th>Nationalite</th>
+                <td>{{ jeux.nationalite }}</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>{{ jeux.age }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('jeux_index') }}">back to list</a>
+
+    <a href="{{ path('jeux_edit', {'id': jeux.id}) }}">edit</a>
+
+    {{ include('jeux/_delete_form.html.twig') }}
+</div>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des jeux
+{% endblock %}
+
+{% block body %}
+    <div class="demo-blog mdl-layout mdl-js-layout has-drawer is-upgraded">
+        <main class="mdl-layout__content">
+            <div class="demo-blog__posts mdl-grid">
+                    <div class="mdl-card coffee-pic mdl-cell mdl-cell--12-col">
+                            <div class="mdl-card__media mdl-color-text--grey-50">
+                              <h3><a href="{{ path('jeux_index') }}">Liste des jeux</a></h3>
+                              <a href="{{ path('jeux_new') }}" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-color--accent" style="
+                              top: 84px;right: -293px;">
+                                    <i class="material-icons mdl-color-text--white" role="presentation">add</i>
+                                    <span class="visuallyhidden">add</span>
+                                  </a>
+                            </div>
+                                   <table class="table stripped centered responsive-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Image</th>
+                                                    <th>Nom</th>
+                                                    <th>Nombre de joueur</th>
+                                                    <th>Durée</th>
+                                                    <th>Age</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for jeux in jeuxes %}
+                                                    <tr>
+                                                        <td>
+                                                            {% if jeux.image is null %}
+                                                                Aucune image disponible
+                                                            {% else %}
+                                                                <img src="{{ asset('uploads/images/' ~ jeux.image.lien) }}" width="100px"/>
+                                                            {% endif %}
+                                                        </td>
+                                                        <td>{{ jeux.nom }}</td>
+                        
+                                                        <td>{{ jeux.nbreJoueurMin }}
+                                                            -
+                                                            {{ jeux.nbreJoueurMax }}</td>
+                                                        <td>{{ jeux.dureeMin }}
+                                                            -
+                                                            {{ jeux.dureeMax }}</td>
+                                                        <td>{{ jeux.age }}
+                                                            ans et +</td>
+                                                        <td>
+                                                            <a href="{{ path('jeux_show', {'id': jeux.id}) }}">
+                                                                <i class="material-icons">zoom_in</i>
+                                                            </a>
+                                                            <a href="{{ path('jeux_edit', {'id': jeux.id}) }}">
+                                                                <i class="material-icons">delete</i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                {% else %}
+                                                    <tr>
+                                                        <td colspan="11">no records found</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                          </div>
+                    </div>
+        </main>
+    </div>
+{% endblock %}

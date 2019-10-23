@@ -1,0 +1,17 @@
+{{ form_start(form) }}
+<div class="row">
+<div class="input-field col s12">
+    {{ form_widget(form) }}
+</div>
+    <button class="btn">{{ button_label|default('Save') }}</button>
+</div>
+{{ form_end(form) }}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('select');
+        var options = {
+            alignment : 'bottom'
+        }
+        var instances = M.FormSelect.init(elems, options);
+      });
+</script>
