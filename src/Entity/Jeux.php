@@ -94,7 +94,7 @@ class Jeux
     private $age;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="date", nullable=false)
      */
     private $date_maj;
 
@@ -102,6 +102,7 @@ class Jeux
     {
         $this->auteur = new ArrayCollection();
         $this->avis = new ArrayCollection();
+        $this->date_maj = new \DateTime('now');
     }
 
     public function getId(): ?int

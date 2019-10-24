@@ -20,8 +20,17 @@
                     <div class="mdl-card__supporting-text meta mdl-color-text--grey-600">
                         <div class="minilogo"></div>
                         <div>
-                            <strong>Dernière mise à jours</strong>
-                            <span>il y a 2 jours</span>
+                            <strong>Dernière mise à jour</strong>
+                            {% if dayofmaj.days <= 0 %}
+                                aujourd'hui
+                            {% elseif dayofmaj.days == 1 %}
+                                il y a 1 jour
+                            {% else %}
+                                il y a
+                                {{ dayofmaj.days }}
+                                jours
+                            {% endif %}
+                            <span></span>
                         </div>
                     </div>
                 </div>

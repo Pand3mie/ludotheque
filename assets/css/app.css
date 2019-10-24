@@ -47,6 +47,7 @@ body .demo-blog {
 .demo-blog .demo-blog__posts {
   max-width: 900px;
   padding: 0;
+  padding-bottom: 12px;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -525,5 +526,5 @@ body .demo-blog {
   background-repeat: no-repeat;
   background-size: 88%;
   position: relative;
-  top: -81px;
+  top: -31px;
 }

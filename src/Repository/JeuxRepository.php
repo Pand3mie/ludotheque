@@ -29,6 +29,15 @@ class JeuxRepository extends ServiceEntityRepository
             ->getResult();
  
     }
+
+    function findLastMaj (){
+ 
+        return $this->createQueryBuilder('jeux')
+            ->select('MAX(jeux.date_maj) AS max_date')
+            ->getQuery()
+            ->getResult();
+ 
+    }
     //select * from jeux as jeux
     //INNER join auteur as a on a.jeux_id = jeux.id
 
