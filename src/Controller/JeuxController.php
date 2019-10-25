@@ -29,7 +29,7 @@ class JeuxController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="jeux_new", methods={"GET","POST"})
+     * @Route("/ajouter", name="jeux_new", methods={"GET","POST"})
      */
     public function new(Request $request, UploadHelper $uploadHelper): Response
     {
@@ -80,19 +80,23 @@ class JeuxController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $uploadedFile = $form['image']->getData();
-
-            if ($uploadedFile) {
-                $newFilename = $uploadHelper->uploadArticleImage($uploadedFile);
-                $image = new Image();
-                $image->setLien($newFilename);
-                $jeux->setImage($image);
-            }
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($image);
-            $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success', 'Jeux mis à jour !');
 
+            if($form['image']->getData() != null ){
+                
+                $uploadedFile = $form['image']->getData();
+
+                if ($uploadedFile) {
+                    $newFilename = $uploadHelper->uploadArticleImage($uploadedFile);
+                    $image = new Image();
+                    $image->setLien($newFilename);
+                    $jeux->setImage($image);
+                }
+                $entityManager->persist($image);
+            }
+
+            $entityManager->flush();
+            $this->addFlash('success', 'Jeux mis à jour !');
             return $this->redirectToRoute('jeux_index');
         }
 

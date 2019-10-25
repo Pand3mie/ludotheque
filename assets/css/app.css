@@ -192,6 +192,11 @@ body .demo-blog {
 .demo-blog .coffee-pic .mdl-card__media {
     background-image: url('../img/game.jpg');
 }
+
+.demo-blog .addgame-pic .mdl-card__media {
+  background-image: url('../img/addgame.jpg');
+}
+
 .demo-blog .something-else .mdl-card__media {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -527,4 +532,20 @@ body .demo-blog {
   background-size: 88%;
   position: relative;
   top: -31px;
+}
+.textarea-height{
+  height: 140px !important;
+}
+
+.minilogo:hover{
+  animation: myrotate 1s linear infinite
+}
+
+@keyframes myrotate {
+  0% {
+    transform: rotate3d(0, 0, 0, 0);
+  }
+  100% {
+    transform: rotate3d(0, 1, 0, 360deg);
+  }
 }

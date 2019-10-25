@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Jeux;
+use App\Entity\Pays;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -10,8 +11,10 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Genre;
 use App\Entity\Editeur;
 use App\Entity\Auteur;
+use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
 class JeuxType extends AbstractType
 {
@@ -25,7 +28,10 @@ class JeuxType extends AbstractType
             ->add('descriptif')
             ->add('duree_min')
             ->add('duree_max')
-            ->add('nationalite')
+            ->add('nationalite', EntityType::class, [
+                'class' => Pays::class,
+                'choice_label' => 'nom_fr_fr'
+            ])
             ->add('age')
             ->add('auteur', EntityType::class, [
                 'class' => Auteur::class,
@@ -47,8 +53,8 @@ class JeuxType extends AbstractType
                 'mapped' => false,
                 'required' => false
             ])
-            ->add('video', FileType::class, [
-                'mapped' => false
+            ->add('video', UrlType::class, [
+                'mapped' => false,
             ])
         ;
     }

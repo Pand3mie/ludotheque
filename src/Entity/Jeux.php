@@ -54,11 +54,6 @@ class Jeux
     private $duree_max;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $nationalite;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Auteur", inversedBy="jeux_auteur")
      */
     private $auteur;
@@ -97,6 +92,12 @@ class Jeux
      * @ORM\Column(type="date", nullable=false)
      */
     private $date_maj;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Pays", cascade={"persist", "remove"})
+     */
+    private $nationalite;
+
 
     public function __construct()
     {
@@ -170,12 +171,12 @@ class Jeux
         return $this;
     }
 
-    public function getNationalite(): ?string
+    public function getNationalite(): ?Pays
     {
         return $this->nationalite;
     }
 
-    public function setNationalite(?string $nationalite): self
+    public function setNationalite(?Pays $nationalite): self
     {
         $this->nationalite = $nationalite;
 
@@ -333,4 +334,5 @@ class Jeux
 
         return $this;
     }
+
 }

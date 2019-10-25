@@ -29,14 +29,14 @@ class Auteur
     private $prenom;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $nationalite;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Jeux", mappedBy="auteur")
      */
     private $jeux_auteur;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Pays", cascade={"persist", "remove"})
+     */
+    private $nationalite;
 
     public function __construct()
     {
@@ -108,6 +108,18 @@ class Auteur
             $this->jeux_auteur->removeElement($jeuxAuteur);
             $jeuxAuteur->removeAuteur($this);
         }
+
+        return $this;
+    }
+
+    public function getNat(): ?Pays
+    {
+        return $this->nat;
+    }
+
+    public function setNat(?Pays $nat): self
+    {
+        $this->nat = $nat;
 
         return $this;
     }

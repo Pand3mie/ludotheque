@@ -24,14 +24,15 @@ class Editeur
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $nationalite;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Jeux", mappedBy="editeur")
      */
     private $jeux_editeur;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Pays", cascade={"persist", "remove"})
+     */
+    private $nationalite;
+    
 
     public function __construct()
     {
@@ -94,6 +95,18 @@ class Editeur
                 $jeuxEditeur->setEditeur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNat(): ?Pays
+    {
+        return $this->nat;
+    }
+
+    public function setNat(?Pays $nat): self
+    {
+        $this->nat = $nat;
 
         return $this;
     }
