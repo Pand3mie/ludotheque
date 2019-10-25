@@ -54,7 +54,7 @@ class JeuxType extends AbstractType
                 'required' => false
             ])
             ->add('video', UrlType::class, [
-                'mapped' => false,
+
             ])
         ;
     }

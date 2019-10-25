@@ -1,52 +1,113 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Jeux{% endblock %}
+{% block title %}Jeux
+{% endblock %}
 
 {% block body %}
-<div class="demo-blog mdl-layout mdl-js-layout has-drawer is-upgraded">
-    <h1>Jeux</h1>
+    <div class="demo-blog mdl-layout mdl-js-layout has-drawer is-upgraded">
+        <main class="mdl-layout__content">
+            <div class="demo-blog__posts mdl-grid">
+                <div class="mdl-card mdl-cell mdl-cell--12-col z-depth-3">
+                    <div class="mdl-card__media mdl-color-text--grey-50">
+                        <h3 class="header">{{ jeux.nom }}</h3>
+                        <div class="fixed-action-btn click-to-toggle direction-top direction-left menu-show" style="position: absolute;
+                        right: 9px;
+                        top: 14px;">
+                                <a class="btn-floating btn-large blue-game">
+                                  <i class="large material-icons">menu</i>
+                                </a>
+                                <ul>
+                                <li><a href="{{ path('jeux_edit', {'id': jeux.id}) }}" class="btn-floating blue-edit-game" style="opacity: 0; transform: scale(0.4) translateY(0px) translateX(40px);">
+                                        <i class="material-icons">edit</i>
+                                        </a></li>
+            
+                                  <li>{{ include('jeux/_delete_form.html.twig') }}</li>
+                                </ul>
+                        </div>                        
+                    </div>
+                    <div class="demo-blog mdl-layout mdl-js-layout has-drawer is-upgraded">
+                        <table class="table fiche_jeux">
+                            <tbody>
+                                <td>
+                                    {% if jeux.image is null %}
+                                        Aucune image disponible
+                                    {% else %}
+                                        <img src="{{ asset('uploads/images/' ~ jeux.image.lien) }}" width="300px" height="400px"/>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if jeux.video %}
+                                    <div class="video-container responsive-video">
+                                        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/{{ jeux.video[32:] }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
+                                    {% endif %}
+                                </td>
+                            </tbody>
+                            <tr>
+                                <th>Nom</th>
+                                <td>{{ jeux.nom }}</td>
+                            </tr>
+                            <tr>
+                                <th>Année</th>
+                                <td>{{ jeux.annee }}</td>
+                            </tr>
+                            <tr>
+                                <th>Nombre de joueur</th>
+                                <td>{{ jeux.nbreJoueurMin }}
+                                    -
+                                    {{ jeux.nbreJoueurMax }}</td>
+                            </tr>
+                            <tr>
+                                <th>Age</th>
+                                <td>à partir de
+                                    {{ jeux.age }}
+                                    ans</td>
+                            </tr>
+                        </td>
+                        <tr>
+                            <th>Description</th>
+                            <td class="active" style="text-align: justify;">{{ jeux.descriptif }}</td>
+                        </tr>
+                        <tr>
+                            <th>Durée</th>
+                            <td>{{ jeux.dureeMin }}
+                                -
+                                {{ jeux.dureeMax }}
+                                min</td>
+                        </tr>
+                        <tr>
+                            <th>Nationalite</th>
+                            <td>{{ jeux.nationalite }}</td>
+                        </tr>
+                        <tr>
+                            <th>Lien vidéo</th>
+                            <td>
+                                <a href="{{ jeux.video }}" target="_blank">{{ jeux.video }}</a>
+                            </td>
+                        </tr>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Nom</th>
-                <td>{{ jeux.nom }}</td>
-            </tr>
-            <tr>
-                <th>Année</th>
-                <td>{{ jeux.annee }}</td>
-            </tr>
-            <tr>
-                <th>Nombre de joueur</th>
-                <td>{{ jeux.nbreJoueurMin }} - {{ jeux.nbreJoueurMax }}</td>
-            </tr>
-            <tr>
-                <th>Age</th>
-                <td>{{ jeux.age }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ jeux.descriptif }}</td>
-            </tr>
-            <tr>
-                <th>Durée</th>
-                <td>{{ jeux.dureeMin }} - {{ jeux.dureeMax }}</td>
-            </tr>
-            <tr>
-                <th>Nationalite</th>
-                <td>{{ jeux.nationalite }}</td>
-            </tr>
-            <tr>
-                <th>Lien vidéo</th>
-                <td>{{ jeux.video }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('jeux_index') }}">back to list</a>
-
-    <a href="{{ path('jeux_edit', {'id': jeux.id}) }}">edit</a>
-
-    {{ include('jeux/_delete_form.html.twig') }}
+                    </tbody>
+                </table>
+                <br>
+                <div class="row">
+                    <div class="col s12 left">
+                        <a href="{{ path('jeux_index') }}">
+                            <i class="medium material-icons">arrow_back</i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.menu-show');
+    var instances = M.FloatingActionButton.init(elems, {
+        direction: 'left',
+        hoverEnabled: false
+    });
+    });
+</script>
 {% endblock %}

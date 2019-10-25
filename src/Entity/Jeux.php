@@ -79,7 +79,7 @@ class Jeux
     private $avis;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Video", inversedBy="jeux_video")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $video;
 
@@ -271,12 +271,12 @@ class Jeux
         return $this;
     }
 
-    public function getVideo(): ?Video
+    public function getVideo(): ?String
     {
         return $this->video;
     }
 
-    public function setVideo(?Video $video): self
+    public function setVideo(?String $video): self
     {
         $this->video = $video;
 
