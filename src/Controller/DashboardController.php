@@ -19,11 +19,17 @@ class DashboardController extends AbstractController
         $now = new \DateTime('now');
         $endDate = new \DateTime($dateMaj[0]['max_date']);
         $interval = $endDate->diff($now);
-
         return $this->render('dashboard/index.html.twig', [
             'controller_name' => 'DashboardController',
             'dayofmaj' => $interval,
         ]);
+    }
+    /**
+     * @Route("/profil", name="profil")
+     */
+    public function Profil(Request $request)
+    {
+        return $this->render('user/profil.html.twig');
     }
 }
 

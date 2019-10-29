@@ -15,6 +15,10 @@ Encore
         css: 'css/[name].css',
         js: 'js/[name].js'
     })
+    .copyFiles({
+        from: './assets/img',
+        to: 'images/[path][name].[hash:8].[ext]'
+    })
     // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
     /*
@@ -47,7 +51,6 @@ Encore
     .enableSourceMaps(!Encore.isProduction())
     // enables hashed filenames (e.g. app.abc123.css)
     .enableVersioning(Encore.isProduction())
-
     // enables @babel/preset-env polyfills
     .configureBabel(() => {}, {
         useBuiltIns: 'usage',
@@ -68,7 +71,7 @@ Encore
     //.autoProvidejQuery()
 
     // uncomment if you use API Platform Admin (composer req api-admin)
-    //.enableReactPreset()
+    .enableReactPreset()
     //.addEntry('admin', './assets/js/admin.js')
 ;
 
