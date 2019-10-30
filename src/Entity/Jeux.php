@@ -98,12 +98,19 @@ class Jeux
      */
     private $nationalite;
 
+    /**
+     * @var ArrayCollection
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="collection")
+     */
+    private $user;
+
 
     public function __construct()
     {
         $this->auteur = new ArrayCollection();
         $this->avis = new ArrayCollection();
         $this->date_maj = new \DateTime('now');
+        $this->user = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -335,4 +342,28 @@ class Jeux
         return $this;
     }
 
+
+    /**
+     * Get the value of user
+     *
+     * @return  ArrayCollection
+     */ 
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set the value of user
+     *
+     * @param  ArrayCollection  $user
+     *
+     * @return  self
+     */ 
+    public function setUser(ArrayCollection $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
 }

@@ -4,7 +4,10 @@
  * We recommend including the built version of this JavaScript file
  * (and its CSS file) in your base layout (base.html.twig).
  */
+const routes = require('../../public/js/fos_js_routes.json');
+import Routing from '../../vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.min.js';
 
+Routing.setRoutingData(routes);
 // any CSS you require will output into a single css file (app.css in this case)
 require('../css/app.css');
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
@@ -12,17 +15,35 @@ require('../css/app.css');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 
 
 class App extends React.Component {
+
+    constructor() {
+        super();
+        this.state = { users: [], loading: true};
+    }
     
+    componentDidMount() {
+        this.getUsers();
+    }
+    
+    getUsers() {
+       axios.get(`api/users`).then(users => {
+           this.setState({ users: users.data, loading: false})
+       })
+       console.log(this.state.users)
+    }
+
     render() {
-        console.log('ici react').
-        return (
-            <div className="row">
-                Hello
+        
+        const loading = this.state.loading;
+        return(
+            <div>
+                
             </div>
-        );
+        )
     }
 }
 

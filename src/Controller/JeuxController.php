@@ -119,4 +119,14 @@ class JeuxController extends AbstractController
 
         return $this->redirectToRoute('jeux_index');
     }
+
+
+    /**
+     * @Route("/ajax-add-collection", name="jeux_collection", options={"expose"=true})
+     */
+    public function addCollection()
+    {
+        return new Response('lol');
+    }
+
 }

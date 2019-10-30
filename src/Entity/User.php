@@ -1,6 +1,7 @@
 <?php
 namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -82,6 +83,19 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $prenom;
+
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Jeux", inversedBy="user")
+     * @ORM\JoinTable(name="collections")
+     */
+    private $collection;
+
+    public function __construct()
+    {
+        $this->collection = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -274,6 +288,26 @@ class User implements UserInterface
     public function setPrenom(?string $prenom): self
     {
         $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of collection
+     */ 
+    public function getCollection()
+    {
+        return $this->collection;
+    }
+
+    /**
+     * Set the value of collection
+     *
+     * @return  self
+     */ 
+    public function setCollection($collection)
+    {
+        $this->collection = $collection;
 
         return $this;
     }

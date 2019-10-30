@@ -7,101 +7,132 @@
     <div class="demo-blog mdl-layout mdl-js-layout has-drawer is-upgraded">
         <main class="mdl-layout__content">
             <div class="demo-blog__posts mdl-grid">
-                    <div class="mdl-card coffee-pic mdl-cell mdl-cell--12-col z-depth-3">
-                            <div class="mdl-card__media mdl-color-text--grey-50">
-                              <h3><a href="{{ path('jeux_index') }}">Liste des jeux</a></h3>
-                              <a href="{{ path('jeux_new') }}" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-color--accent" style="
-                              position: relative;
-                              top: 15px;
-                              right: -300px">
-                                    <i class="material-icons mdl-color-text--white" role="presentation">add</i>
-                                    <span class="visuallyhidden">add</span>
-                                  </a>
-                            </div>
-                                   <table id="show_game" class="table stripped centered responsive-table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Image</th>
-                                                    <th>Nom</th>
-                                                    <th>Genre</th>
-                                                    <th>Nombre de joueur</th>
-                                                    <th>Durée</th>
-                                                    <th>Age</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {% for jeux in jeuxes %}
-                                                    <tr>
-                                                        <td>
-                                                            {% if jeux.image is null %}
-                                                                Aucune image disponible
-                                                            {% else %}
-                                                                <img src="{{ asset('uploads/images/' ~ jeux.image.lien) }}" width="100px" height="100px"/>
-                                                            {% endif %}
-                                                        </td>
-                                                        <td>{{ jeux.nom }}</td>
-                                                        <td>{{ jeux.genre }}</td>
-                                                        <td>{{ jeux.nbreJoueurMin }}
-                                                            -
-                                                            {{ jeux.nbreJoueurMax }}</td>
-                                                        <td>{{ jeux.dureeMin }}
-                                                            -
-                                                            {{ jeux.dureeMax }}</td>
-                                                        <td>{{ jeux.age }}
-                                                            ans et +</td>
-                                                        <td>
-                                                            <a href="{{ path('jeux_show', {'id': jeux.id}) }}">
-                                                                <i class="material-icons">zoom_in</i>
-                                                            </a>
-                                                            <a href="{{ path('jeux_edit', {'id': jeux.id}) }}">
-                                                                <i class="material-icons">delete</i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                {% else %}
-                                                    <tr>
-                                                        <td colspan="11">no records found</td>
-                                                    </tr>
-                                                {% endfor %}
-                                            </tbody>
-                                        </table>
-                          </div>
-                          <a href="{{ path('dashboard') }}" class="btn-floating btn-small waves-effect waves-light orange"><i class="material-icons">arrow_back</i></a>
-                    </div> 
+                <div class="mdl-card coffee-pic mdl-cell mdl-cell--12-col z-depth-3">
+                    <div class="mdl-card__media mdl-color-text--grey-50">
+                        <h3>
+                            <a href="{{ path('jeux_index') }}">Liste des jeux</a>
+                        </h3>
+                        <a href="{{ path('jeux_new') }}" class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--fab mdl-color--accent" style="
+                                                                                              position: relative;
+                                                                                              top: 15px;
+                                                                                              right: -300px">
+                            <i class="material-icons mdl-color-text--white" role="presentation">add</i>
+                            <span class="visuallyhidden">add</span>
+                        </a>
+                    </div>
+                    <table id="show_game" class="table stripped centered responsive-table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Nom</th>
+                                <th>Genre</th>
+                                <th>Nombre de joueur</th>
+                                <th>Durée</th>
+                                <th>Age</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for jeux in jeuxes %}
+                                <tr>
+                                    <td>
+                                        {% if jeux.image is null %}
+                                            Aucune image disponible
+                                        {% else %}
+                                            <img src="{{ asset('uploads/images/' ~ jeux.image.lien) }}" width="100px" height="100px"/>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ jeux.nom }}</td>
+                                    <td>{{ jeux.genre }}</td>
+                                    <td>{{ jeux.nbreJoueurMin }}
+                                        -
+                                        {{ jeux.nbreJoueurMax }}</td>
+                                    <td>{{ jeux.dureeMin }}
+                                        -
+                                        {{ jeux.dureeMax }}</td>
+                                    <td>{{ jeux.age }}
+                                        ans et +</td>
+                                    <td>
+                                        <a class="tooltipped" data-position="bottom" data-tooltip="Zoom sur {{ jeux.nom }}" href="{{ path('jeux_show', {'id': jeux.id}) }}">
+                                            <i class="material-icons">zoom_in</i>
+                                        </a>
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <a class="tooltipped" data-position="bottom" data-tooltip="Supprimer {{ jeux.nom }}" href="{{ path('jeux_edit', {'id': jeux.id}) }}">
+                                                <i class="material-icons">delete</i>
+                                            </a>
+                                        {% endif %}
+                                        <a class="tooltipped ajouter_collection" data-id="{{ jeux.id }}" data-position="bottom" data-tooltip="Ajouter {{ jeux.nom }} à ma collection">
+                                            <i class="material-icons">add</i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="11">no records found</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <a href="{{ path('dashboard') }}" class="btn-floating btn-small waves-effect waves-light orange">
+                    <i class="material-icons">arrow_back</i>
+                </a>
+            </div>
         </main>
     </div>
     <script>
-        $(document).ready( function () {
+        $(document).ready(function () {
+            $('.tooltipped').tooltip();
+
+            $('.ajouter_collection').each(function() {
+                $(this).on('click', function (event) {
+                    event.preventDefault();
+                    var id = $(this).attr('data-id');
+                    $.ajax({
+                        method: "POST",
+                        url: "ajax-add-collection",
+                        data: {
+                            id: id
+                        },
+                        success: function () {
+                            alert(id);
+                        }
+                    });
+                })
+             })
+
             $('#show_game').DataTable({
                 columnDefs: [
-                { orderable: false, targets: [0,6] }
+                    {
+                        orderable: false,
+                        targets: [0, 6]
+                    }
                 ],
                 "pageLength": 10,
                 ordering: true,
                 language: {
-                    processing:     "Traitement en cours...",
-                    search:         "Rechercher&nbsp;:",
-                    lengthMenu:    "Afficher _MENU_ &eacute;l&eacute;ments",
-                    info:           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-                    infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
-                    infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
-                    infoPostFix:    "",
+                    processing: "Traitement en cours...",
+                    search: "Rechercher&nbsp;:",
+                    lengthMenu: "Afficher _MENU_ &eacute;l&eacute;ments",
+                    info: "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                    infoEmpty: "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                    infoFiltered: "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                    infoPostFix: "",
                     loadingRecords: "Chargement en cours...",
-                    zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
-                    emptyTable:     "Aucune donnée disponible dans le tableau",
+                    zeroRecords: "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                    emptyTable: "Aucune donnée disponible dans le tableau",
                     paginate: {
-                        first:      "Premier",
-                        previous:   "Pr&eacute;c&eacute;dent",
-                        next:       "Suivant",
-                        last:       "Dernier"
+                        first: "Premier",
+                        previous: "Pr&eacute;c&eacute;dent",
+                        next: "Suivant",
+                        last: "Dernier"
                     },
                     aria: {
-                        sortAscending:  ": activer pour trier la colonne par ordre croissant",
+                        sortAscending: ": activer pour trier la colonne par ordre croissant",
                         sortDescending: ": activer pour trier la colonne par ordre décroissant"
                     }
                 }
             });
-        } );
+        });
     </script>
 {% endblock %}

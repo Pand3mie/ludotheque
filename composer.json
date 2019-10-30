@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "behat/transliterator": "^1.2",
+        "friendsofsymfony/jsrouting-bundle": "^2.4",
         "gedmo/doctrine-extensions": "^2.4",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "4.3.*",
